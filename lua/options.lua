@@ -21,3 +21,10 @@ api.nvim_create_autocmd("textyankpost", {
     vim.hl.on_yank()
   end,
 })
+
+vim.cmd [[
+    highlight DiagnosticVirtualTextError guifg=#FF5F5F guibg=#2F2F2F
+    highlight DiagnosticVirtualTextWarn guifg=#FFD700 guibg=#2F2F2F
+    highlight DiagnosticVirtualTextInfo guifg=#87CEEB guibg=#2F2F2F
+    highlight DiagnosticVirtualTextHint guifg=#98FB98 guibg=#2F2F2F
+]]

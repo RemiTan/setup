@@ -85,10 +85,59 @@ lspconfig.pyright.setup {
   },
 }
 
-local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-end
+-- local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+-- for type, icon in pairs(signs) do
+--   local hl = "DiagnosticSign" .. type
+--   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+-- end
 
-vim.fn.sign_define("DiagnosticError", { gui = bold, bg = "#FF0000" })
+local signs = {
+  ERROR = "",
+  WARN = "",
+  HINT = "󰌵",
+  INFO = "",
+}
+
+vim.diagnostic.config {
+  virtual_text = {
+    prefix = function(diagnostic, i, o)
+      return signs[vim.diagnostic.severity[diagnostic.severity]]
+    end,
+    format = function(diagnostic)
+      -- Append the error code to the message if available
+      if diagnostic.code then
+        return string.format("%s: %s", diagnostic.code, diagnostic.message)
+      else
+        return diagnostic.message
+      end
+    end,
+  },
+}
+
+local debounce_timer = nil
+
+-- after a delay, call diagnostics
+vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
+  callback = function()
+    if debounce_timer then
+      debounce_timer:stop()
+      debounce_timer = nil
+    end
+
+    debounce_timer = vim.loop.new_timer()
+    debounce_timer:start(
+      1000,
+      0,
+      vim.schedule_wrap(function()
+        vim.diagnostic.show()
+      end)
+    )
+  end,
+})
+
+-- call diagnostic on save
+vim.api.nvim_create_autocmd("BufWritePost", {
+  callback = function()
+    vim.diagnostic.show()
+  end,
+})
