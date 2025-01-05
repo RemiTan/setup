@@ -1,6 +1,7 @@
 local on_attach = require("nvchad.configs.lspconfig").on_attach
 local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
+-- local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 local lspconfig = require "lspconfig"
 
@@ -29,9 +30,10 @@ lspconfig.lua_ls.setup {
   settings = {
     Lua = {
       diagnostics = {
-        enable = false, -- Disable all diagnostics from lua_ls
+        enable = true, -- Disable all diagnostics from lua_ls
         -- globals = { "vim" },
       },
+      hint = { enable = true },
       workspace = {
         library = {
           vim.fn.expand "$VIMRUNTIME/lua",
@@ -49,8 +51,8 @@ lspconfig.lua_ls.setup {
 
 lspconfig.ruff.setup {
   on_attach = on_attach,
-  capabilities = capabilities,
   on_init = on_init,
+  capabilities = capabilities,
 
   trace = "messages",
 
@@ -63,44 +65,73 @@ lspconfig.ruff.setup {
     ruff = {
       filetypes = { "python" },
       settings = {
-        ruff = { completion = { callSnippet = "Replace" } },
+        ruff = {
+          completion = { callSnippet = "Replace" },
+        },
       },
     },
   },
 }
 
-lspconfig.pyright.setup {
+lspconfig.basedpyright.setup {
   on_attach = on_attach,
-  capabilities = capabilities,
   on_init = on_init,
+  capabilities = capabilities,
 
   settings = {
     filetypes = { "python" },
-    pyright = { disableOrganizeImports = true },
-    python = {
-      analysis = {
-        ignore = { "*" },
+    basedpyright = {
+      disableOrganizeImports = true,
+      typeCheckingMode = "basic", -- Disable type checking
+      inlayHints = {
+        variableTypes = true,
+        functionReturnTypes = true,
+        parameterTypes = true,
       },
+      analysis = {
+        diagnosticMode = "workspace",
+      },
+    },
+    python = {
+      pythonPath = "~/.venv/WhereIsWaldo/bin/python",
     },
   },
 }
 
--- local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
--- for type, icon in pairs(signs) do
---   local hl = "DiagnosticSign" .. type
---   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
--- end
-
+-- lspconfig.pyright.setup {
+--   on_attach = on_attach,
+--   on_init = on_init,
+--   capabilities = capabilities,
+--
+--   settings = {
+--     filetypes = { "python" },
+--     pyright = {
+--       disableorganizeimports = true,
+--       inlayHints = {
+--         variableTypes = true,
+--         functionReturnTypes = true,
+--         parameterTypes = true,
+--       },
+--     },
+--     python = {
+--       analysis = {
+--         ignore = { "*" },
+--       },
+--       pythonPath = "~/.venv/WhereIsWaldo/bin/python",
+--     },
+--   },
+-- }
+--
 local signs = {
-  ERROR = "",
-  WARN = "",
-  HINT = "󰌵",
-  INFO = "",
+  error = "",
+  warn = "",
+  hint = "󰌵",
+  info = "",
 }
 
 vim.diagnostic.config {
   virtual_text = {
-    prefix = function(diagnostic, i, o)
+    prefix = function(diagnostic)
       return signs[vim.diagnostic.severity[diagnostic.severity]]
     end,
     format = function(diagnostic)
@@ -141,3 +172,12 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     vim.diagnostic.show()
   end,
 })
+
+require("telescope").setup {
+  extensions = {
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown {},
+    },
+  },
+}
+require("telescope").load_extension "ui-select"

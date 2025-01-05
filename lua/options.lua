@@ -28,3 +28,5 @@ vim.cmd [[
     highlight DiagnosticVirtualTextInfo guifg=#87CEEB guibg=#2F2F2F
     highlight DiagnosticVirtualTextHint guifg=#98FB98 guibg=#2F2F2F
 ]]
+
+o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"

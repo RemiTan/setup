@@ -5,12 +5,12 @@ local bo = vim.bo
 
 local map = vim.keymap.set
 
+map("n", "<leader>sk", function()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, { desc = "inlay hint" })
+
 map("i", "<C-b>", "<ESC>^i", { desc = "move beginning of line" })
 map("i", "<C-e>", "<End>", { desc = "move end of line" })
-map("i", "<C-h>", "<Left>", { desc = "move left" })
-map("i", "<C-l>", "<Right>", { desc = "move right" })
-map("i", "<C-j>", "<Down>", { desc = "move down" })
-map("i", "<C-k>", "<Up>", { desc = "move up" })
 
 map("n", "<C-h>", "<C-w>h", { desc = "switch window left" })
 map("n", "<C-l>", "<C-w>l", { desc = "switch window right" })
@@ -48,6 +48,7 @@ end, { desc = "general format file" })
 map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "LSP diagnostic loclist" })
 map("n", "<leader>rn", "<leader>ra", { desc = "LSP diagnostic loclist", remap = true })
 map("n", "<C-k>", "<C-s>", { desc = "LSP signature help", remap = true })
+map("i", "<C-k>", "<C-s>", { desc = "LSP signature help", remap = true })
 
 map("n", "<leader>x", ":.lua<CR>", { desc = "execute" })
 map("v", "<leader>x", ":lua<CR>", { desc = "execute" })
@@ -458,3 +459,23 @@ end, { desc = "Diff this ~" })
 
 -- Text object
 map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Gitsigns select hunk" })
+
+-- snacks
+map("n", "<leader>gg", function()
+  require("snacks").lazygit()
+end, { desc = "lazy git" })
+
+map("n", "<leader>gl", function()
+  require("snacks").lazygit.log()
+end, { desc = "lazy git log" })
+
+map("n", "<leader>gf", function()
+  require("snacks").lazygit.log_file()
+end, { desc = "lazy git log file" })
+
+map("n", "<leader>gB", function()
+  require("snacks").gitbrowse()
+end, { desc = "lazy git browse" })
+
+-- noice
+map("n", "<leader>nh", "<cmd>Telescope notify<CR>", { desc = "Notification history" })
