@@ -1,5 +1,12 @@
 return {
   {
+    "gbprod/substitute.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require "configs.substitute"
+    end,
+  },
+  {
     "saghen/blink.cmp",
     dependencies = "rafamadriz/friendly-snippets",
     enabled = false,
@@ -180,7 +187,9 @@ return {
   {
     "echasnovski/mini.nvim",
     lazy = false,
-    config = function() end,
+    config = function()
+      require "configs.mini"
+    end,
   },
   {
     "stevearc/conform.nvim",

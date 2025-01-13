@@ -98,10 +98,10 @@ map("n", '<leader>f"', "<cmd>Telescope registers<CR>", { desc = "telescope [F]in
 map("n", "<leader>fq", "<cmd>Telescope quickfix<CR>", { desc = "telescope [F]ind [Q]uickfix" })
 map("n", "<leader>fQ", "<cmd>Telescope quickfixhistory<CR>", { desc = "telescope [F]ind [Q]uickfix history" })
 
-map("n", "gR", "<cmd>Telescope lsp_references<CR>", { desc = "telescope todo-comments" })
-map("n", "gI", "<cmd>Telescope lsp_implementations<CR>", { desc = "telescope todo-comments" })
+map("n", "gR", "<cmd>Telescope lsp_references<CR>", { desc = "telescopelsp references" })
+map("n", "gI", "<cmd>Telescope lsp_implementations<CR>", { desc = "telescope implementations" })
 
-map("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", { desc = "telescope todo-comments" })
+map("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", { desc = "telescope definitions" })
 
 map("n", "<leader>/", function()
   require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
@@ -187,6 +187,8 @@ map("n", "<leader>ht", function()
   require("nvchad.term").new { pos = "sp" }
 end, { desc = "terminal new horizontal term" })
 
+map("n", "<leader>h", "<Nop>", { desc = "remove keybinding" })
+
 map("n", "<leader>vt", function()
   require("nvchad.term").new { pos = "vsp" }
 end, { desc = "terminal new vertical term" })
@@ -220,7 +222,7 @@ map("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
 
 --------------HARPOON-------------------
 
-map("n", "<leader>a", function()
+map("n", "<leader>ha", function()
   require("harpoon"):list():add()
 end, { desc = "Harpoon [A]dd" })
 
@@ -479,3 +481,11 @@ end, { desc = "lazy git browse" })
 
 -- noice
 map("n", "<leader>nh", "<cmd>Telescope notify<CR>", { desc = "Notification history" })
+
+-- substitute
+
+local substitute = require "substitute"
+map("n", "s", substitute.operator, { desc = "Substitute with motion" })
+map("n", "ss", substitute.line, { desc = "Substitute line" })
+map("n", "S", substitute.eol, { desc = "Substitute to end of line" })
+map("x", "s", substitute.visual, { desc = "Substitute in visual mode" })

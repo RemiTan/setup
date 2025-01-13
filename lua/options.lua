@@ -30,3 +30,13 @@ vim.cmd [[
 ]]
 
 o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
+vim.ui.input = function(opts, on_confirm)
+  if opts.prompt and opts.prompt:find "surround" then
+    -- Adjust the options or behavior if necessary
+    require("snacks").input(opts, on_confirm)
+  else
+    -- Fallback for non-mini.surround prompts
+    vim.fn.input(opts.prompt or "", opts.default or "")
+  end
+end
