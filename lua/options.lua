@@ -18,7 +18,7 @@ api.nvim_create_autocmd("textyankpost", {
   desc = "highlight when yanking (copying) text",
   group = api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
   callback = function()
-    vim.hl.on_yank()
+    vim.highlight.on_yank()
   end,
 })
 

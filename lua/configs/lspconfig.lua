@@ -82,7 +82,6 @@ lspconfig.basedpyright.setup {
     filetypes = { "python" },
     basedpyright = {
       disableOrganizeImports = true,
-      typeCheckingMode = "basic", -- Disable type checking
       inlayHints = {
         variableTypes = true,
         functionReturnTypes = true,
@@ -90,14 +89,19 @@ lspconfig.basedpyright.setup {
       },
       analysis = {
         diagnosticMode = "workspace",
+        typeCheckingMode = "basic", -- Disable type checking
+        diagnosticSeverityOverrides = {
+          reportAttributeAccessIssue = false,
+          reportArgumentType = false,
+          reportUnreachable = false,
+        },
       },
     },
     python = {
-      pythonPath = "~/.venv/WhereIsWaldo/bin/python",
+      pythonPath = "~/miniconda3/envs/csu/bin/python",
     },
   },
 }
-
 -- lspconfig.pyright.setup {
 --   on_attach = on_attach,
 --   on_init = on_init,
@@ -117,11 +121,11 @@ lspconfig.basedpyright.setup {
 --       analysis = {
 --         ignore = { "*" },
 --       },
---       pythonPath = "~/.venv/WhereIsWaldo/bin/python",
+--       pythonPath = "~/miniconda3/envs/csu/bin/python",
 --     },
 --   },
 -- }
---
+
 local signs = {
   error = "",
   warn = "",

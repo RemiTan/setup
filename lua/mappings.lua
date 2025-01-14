@@ -185,7 +185,7 @@ map("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
 -- new terminals
 map("n", "<leader>ht", function()
   require("nvchad.term").new { pos = "sp" }
-end, { desc = "terminal new horizontal term" })
+end, { desc = "terminal new horizontal term", remap = true })
 
 map("n", "<leader>h", "<Nop>", { desc = "remove keybinding" })
 
