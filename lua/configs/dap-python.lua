@@ -1,2 +1,2 @@
-local path = "/root/.local/share/nvim_4/mason/packages/debugpy/venv/bin/python"
+local path = "/root/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
 require("dap-python").setup(path)

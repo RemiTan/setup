@@ -3,7 +3,7 @@ local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
 -- local capabilities = require("blink.cmp").get_lsp_capabilities()
 require("mason-lspconfig").setup {
-  ensure_installed = { "debugpy", "ruff", "lua_ls", "basedpyright" }, -- Add your desired servers here
+  ensure_installed = { "ruff", "lua_ls", "basedpyright" }, -- Add your desired servers here
 }
 
 local lspconfig = require "lspconfig"
@@ -101,7 +101,7 @@ lspconfig.basedpyright.setup {
       },
     },
     python = {
-      pythonPath = "/usr/bin/python",
+      pythonPath = "/usr/local/bin/python",
     },
   },
 }

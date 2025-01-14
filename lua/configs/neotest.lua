@@ -5,7 +5,7 @@ require("neotest").setup {
       dap = { justmycode = false },
       args = { "--log-level", "debug", "--quiet" },
       runner = "pytest",
-      python = "/usr/bin/python",
+      python = "/usr/local/bin/python",
     },
   },
   output = {
