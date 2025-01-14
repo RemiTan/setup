@@ -1,6 +1,12 @@
 return {
   {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
+  },
+  {
     "amitds1997/remote-nvim.nvim",
+    enabled = false,
     lazy = false,
     dependencies = {
       "nvim-lua/plenary.nvim", -- For standard functions
