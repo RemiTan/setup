@@ -489,3 +489,7 @@ map("n", "s", substitute.operator, { desc = "Substitute with motion" })
 map("n", "ss", substitute.line, { desc = "Substitute line" })
 map("n", "S", substitute.eol, { desc = "Substitute to end of line" })
 map("x", "s", substitute.visual, { desc = "Substitute in visual mode" })
+
+-- undotree
+map("n", "<leader>ut", "<cmd>UndotreeToggle<CR>", { desc = "Toggle undotree" })
+map("n", "<leader>uf", "<cmd>UndotreeFocus<CR>", { desc = "Toggle undotree" })
