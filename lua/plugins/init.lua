@@ -1,5 +1,9 @@
 return {
   {
+    "mbbill/undotree",
+    event = "VimEnter",
+  },
+  {
     "amitds1997/remote-nvim.nvim",
     lazy = false,
     dependencies = {

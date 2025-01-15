@@ -5,7 +5,7 @@ require("neotest").setup {
       dap = { justmycode = false },
       args = { "--log-level", "debug", "--quiet" },
       runner = "pytest",
-      python = ".venv/pytest/bin/python",
+      python = "/home/remi/miniconda3/envs/csu/bin/python",
     },
   },
   output = {

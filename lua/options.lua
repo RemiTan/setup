@@ -14,6 +14,8 @@ o.cursorlineopt = "number,line"
 opt.relativenumber = true
 opt.scrolloff = 8
 
+o.undofile = true
+
 api.nvim_create_autocmd("textyankpost", {
   desc = "highlight when yanking (copying) text",
   group = api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
